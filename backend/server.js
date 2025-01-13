@@ -25,7 +25,7 @@ try {
   console.error('Sertifika dosyası okunurken hata oluştu:', error.message);
   process.exit(1);
 }
-const credentials = { key: privateKey, cert: certificate };
+const credentials = { key: privateKey, cert: certificate, passphrase: '12345678' };
 
 const server = https.createServer(credentials, app); // https.createServer kullanıldı
 const io = new Server(server, {
