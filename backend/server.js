@@ -31,8 +31,7 @@ const server = https.createServer(credentials, app); // https.createServer kulla
 const io = new Server(server, {
   cors: {
     origin: '*', // Üretim ortamında burayı kısıtlamanız önerilir
-    methods: ['*'],
-  allowedHeaders: ['*']
+    methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
   },
 });
 
