@@ -27,7 +27,7 @@ function FileUpload({ onUploadSuccess }) {
     formData.append("video", selectedFile);
 
     try {
-      const response = await fetch("http://localhost:3000/upload", {
+      const response = await fetch(`${url}/upload`, {
         method: "POST",
         body: formData,
       });

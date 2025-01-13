@@ -17,11 +17,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import "./index.css";
+import { url } from "./utils";
 
 library.add(faVideoIcon, faTimes, faFolderOpen, faPhone, faPhoneSlash, faTrash);
 
-// Gerekirse kendi IP/URL adresinizi yazın
-const url = "http://35.176.36.116:3000";
 const socket = io(url);
 
 function App() {
@@ -211,7 +210,7 @@ function App() {
   // Video silme işlemi
   const handleVideoDelete = async (filename) => {
     try {
-      const response = await fetch(`http://localhost:3000/videos/${filename}`, {
+      const response = await fetch(`${url}/videos/${filename}`, {
         method: "DELETE",
       });
 
