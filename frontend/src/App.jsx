@@ -21,7 +21,7 @@ import "./index.css";
 library.add(faVideoIcon, faTimes, faFolderOpen, faPhone, faPhoneSlash, faTrash);
 
 // Gerekirse kendi IP/URL adresinizi yazın
-const url = "http://192.168.1.14:3000";
+const url = "http://35.176.36.116:3000";
 const socket = io(url);
 
 function App() {
