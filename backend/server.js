@@ -31,7 +31,8 @@ const server = https.createServer(credentials, app); // https.createServer kulla
 const io = new Server(server, {
   cors: {
     origin: '*', // Üretim ortamında burayı kısıtlamanız önerilir
-    methods: ['GET', 'POST', 'DELETE'],
+    methods: ['*'],
+  allowedHeaders: ['*']
   },
 });
 
@@ -347,7 +348,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = 3000;
+const PORT = 8443;
 server.listen(PORT, () => {
   console.log(`Sunucu HTTPS üzerinden ${PORT} portunda çalışıyor.`);
 });
