@@ -1,6 +1,6 @@
 // server.js
 const express = require('express');
-const http = require('http');
+const https = require('https'); // http yerine https kullandık
 const cors = require('cors');
 const { Server } = require('socket.io');
 const multer = require('multer');
@@ -8,7 +8,26 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express();
-const server = http.createServer(app);
+
+// HTTPS için sertifika ve özel anahtar
+
+let privateKey;
+let certificate;
+try {
+  privateKey = fs.readFileSync('./private-key.pem', 'utf8');
+} catch (error) {
+  console.error('Özel anahtar dosyası okunurken hata oluştu:', error.message);
+}
+
+try {
+  certificate = fs.readFileSync('./certificate.pem', 'utf8');
+} catch (error) {
+  console.error('Sertifika dosyası okunurken hata oluştu:', error.message);
+  process.exit(1);
+}
+const credentials = { key: privateKey, cert: certificate };
+
+const server = https.createServer(credentials, app); // https.createServer kullanıldı
 const io = new Server(server, {
   cors: {
     origin: '*', // Üretim ortamında burayı kısıtlamanız önerilir
@@ -330,5 +349,5 @@ app.use((err, req, res, next) => {
 
 const PORT = 3000;
 server.listen(PORT, () => {
-  console.log(`Sunucu ${PORT} portunda çalışıyor.`);
+  console.log(`Sunucu HTTPS üzerinden ${PORT} portunda çalışıyor.`);
 });
